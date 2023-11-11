@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Effacer un post{% endblock title %}
+
+{% block content %}
+{% if  user.is_authenticated  %}
+<h1>Delete post</h1>
+<br/><br/>
+<h3>Voulez vous vraiment supprimer {{post.titre}} </h3>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class='btn btn-danger'>Supprimer</button> 
+
+</form>
+{% else %}
+<h1> Go and Login quick!!</h1>
+{% endif %}
+{% endblock content %}

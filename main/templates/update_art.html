@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Modifier un post{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated and user.id == article.auteur.id    %}
+<h1>Edit post</h1>
+<br/><br/>
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+    <button class='btn btn-secondary'>Modifier</button> 
+</form>
+{% else %}
+<h1> Go and Login quick!!</h1>
+{% endif %}
+
+{% endblock content %}

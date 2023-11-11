@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    {% load static %}
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    
+
+    <title>{% block title %}Blog Site{% endblock title%}</title>
+</head>
+<body>
+    <nav class= "navbar navbar-expand-lg bg-dark navbar-dark ">
+
+        <div class= "container-fluid ">
+      
+          <a class= "navbar-brand " href= "{% url "home" %}">LeZachats</a>
+          <button class= "navbar-toggler " type= "button " data-bs-toggle= "collapse " data-bs-target= "#navbarSupportedContent " aria-controls= "navbarSupportedContent " aria-expanded= "false " aria-label= "Toggle navigation ">
+            <span class= "navbar-toggler-icon "></span>
+          </button>
+          <div class= "collapse navbar-collapse " id= "navbarSupportedContent ">
+            <ul class= "navbar-nav me-auto mb-2 mb-lg-0 ">
+              {% if  user.is_authenticated  %}
+              {% if user.is_staff %}
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "admin:index" %}">Admin</a>
+              </li>
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "add_cat" %}">Ajouter une categorie</a>
+              </li>
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "verif" %}">Fil d'attente</a>
+              </li>
+              {% endif %}
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "add_art" %}">Ajouter un article</a>
+              </li>
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "profile_page" user.id %}">Mon profil </a>
+              </li>
+              
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "logout" %}">Se deconnecter</a>
+              </li>
+              {% else %}
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "register" %}">S'inscrire</a>
+              </li>
+              <li class= "nav-item ">
+                <a class= "nav-link active " aria-current= "page " href= " {% url "login" %}">Se connecter</a>
+              </li>
+
+              {% endif %}
+              
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+      {% block content %}
+      
+      {% endblock content %}
+      {% load static %}
+      
+</body>
+</html>

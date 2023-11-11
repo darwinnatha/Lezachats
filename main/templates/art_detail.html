@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{article.titre_slug }} {% endblock title %}
+{% block content %}
+{% load static %}
+<link rel='stylesheet' href='{% static "new/css/detail.css" %}'>
+<div class="product">
+    <div class="product-image">
+      <img src="{{article.image.url}}" alt="Image du produit">
+    </div>
+    <div class="product-info">
+      <h2>{{article.nom}}</h2>
+      <p>Prix : {{article.prix}} Fcfa</p>
+      <p>Vendeur : <a href='{% url "profile_page" article.auteur.profile.id%}'>{{article.auteur}} </a></p>
+      <p>Description : {{article.corps}}</p>
+      <p>
+        <form action='{% url "like_art" article.pk %}' method="article">
+            {% if user.is_authenticated %}
+                {% csrf_token %}
+    
+    
+                {% if liked %}
+                    <button type='submit', name='article_id', value='{{ article.id }}',
+                    class="btn btn-danger btn-sm">Unlike</button> - 
+                {% else %}
+                    <button type='submit', name='article_id', value='{{ article.id }}' 
+                    class="btn btn-primary btn-sm">Like</button> - 
+                {% endif %}
+            {% endif %}
+            {{ total_likes}} like(s)
+        </form>
+      </p>
+      <p><a href='http://wa.me/{{article.auteur.profile.numero_de_telephone}}' class='btn btn-primary' >Contacter le vendeur</a>
+    </div>
+  </div>
+
+<br/>
+
+{% endblock content %}

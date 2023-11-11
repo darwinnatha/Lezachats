@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Modification {% endblock title %}
+
+{% block content %}
+{% load static %}
+<link rel='stylesheet' href='{% static "new/css/profile.css" %}'
+<title>Profil de l'Utilisateur</title>
+<style>
+    .profile-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .profile-image {
+        width: 30%;
+        margin: 10px;
+    }
+
+    .user-info {
+        width: 30%;
+        margin: 10px;
+    }
+
+    .products-list {
+        width: 100%;
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="profile-container">
+    <!-- Section de l'image du profil (en haut à gauche) -->
+    <div class="profile-image">
+        <img src="{{ profile.pp.url }}" alt="{{ profile.user.username }}" width='200'>
+    </div>
+
+    <!-- Section des informations de l'utilisateur (en bas à droite) -->
+    <div class="user-info">
+        <h2>Informations de l'utilisateur</h2>
+        <p>Nom : {{ profile.user.last_name }}</p>
+        <p>Prénom : {{ profile.user.first_name }}</p>
+        <p>Nom d'utilisateur : {{ profile.user.username }}</p>
+        <p>Numéro de téléphone : {{ profile.numero_de_telephone }}</p>
+        <p><a href='{% url "edit_profile" user.profile.id%}' class='btn btn-warning'>Modifier Vos infos</a></p>
+    </div>
+</div>
+
+<!-- Liste des produits de l'utilisateur (en dessous) -->
+<h2>Produits</h2>
+<div class="product-list">
+    {% for article in articles%}
+    {% if article.auteur.id == user.id or user.is_staff == True %}
+    <div class="product">
+        <a href='{% url "art_detail" article.pk %}'>
+        <img src="{{article.image.url}}" alt="Product Image" class="product-image"></a>
+        <div class="product-details">
+          <h3>{{article.nom}}</h3>
+          <p>{{article.corps}}</p>
+          <p>{{article.prix}}</p>
+          {% if user.id == profile.user.id %}
+          <div class="buttons">
+            <a class="edit btn btn-primary btn-sm" href='{% url "edit_art" article.pk %}'  >Éditer</a>
+            <a class="delete btn btn-danger btn-sm" href='{% url "delete_art" article.pk %}' >Supprimer</a>
+          </div>
+          {% endif %}
+          {% endif %}
+    </div>
+</div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

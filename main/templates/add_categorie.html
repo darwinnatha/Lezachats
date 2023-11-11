@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Ajouter une categorie{% endblock title %}
+
+{% block content %}
+<h1>Add Category</h1>
+<br/><br/>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class='btn btn-secondary'>Ajouter</button> 
+</form>
+
+{% endblock content %}

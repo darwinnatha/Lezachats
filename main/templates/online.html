@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Admin{% endblock title %}
+
+{% block content %}
+{% if user.is_staff %}
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin: 10px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+        
+        /* Media Query pour les appareils mobiles (écran de moins de 600px de largeur) */
+        @media (max-width: 600px) {
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        
+            th, td {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+        
+            td {
+                border: none;
+                border-bottom: 1px solid #ddd;
+            }
+        }
+    </style>
+    <h1>Liste des Articles en Attente</h1>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Nom de l'Article</th>
+                <th>Catégorie</th>
+                <th>Description</th>
+                <th>Image de l'Article</th>
+                <th>Nom de l'Auteur</th>
+                <th>Mettre en Ligne</th>
+            </tr>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.nom }}</td>
+                    <td>{{ article.categorie }}</td>
+                    <td>{{ article.corps }}</td>
+                    <td><img src="{{ article.image.url }}" alt="{{ article.nom }}"></td>
+                    <td>{{ article.auteur.username }}</td>
+                    <td><input type="checkbox" name="articles_a_approuver" value="{{ article.id }}"></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Approuver les Articles Sélectionnés">
+    </form>
+
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Categorie page{% endblock%}
+
+{% block content %}
+{% if categorie_post %}
+<h1>{{cats}}</h1>
+    {% for post in categorie_post %}
+    <li><a href='{% url "art_detail" post.id %}'>{{post.titre}}</a> -
+        {{post.auteur.first_name}} 
+        {{post.auteur.last_name}}
+    {% if user.is_authenticated and user.id == post.auteur.id    %}
+    <small>(<a href='{% url "edit_post" post.pk %}' >Modifier</a>)(<a href='{% url "delete_post" post.pk %}' >Supprimer</a>)
+    {% endif %}
+    </small><br/>
+    {{post.corps|slice:100|safe}}</li>
+    {% endfor %}
+{% else %}
+    <h2> Desole cette page n'existe pas </h2>
+{% endif %}
+{% endblock content %}

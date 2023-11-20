@@ -1,0 +1,45 @@
+.product-panel {
+    flex: 3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.product {
+    width: 23%; /* Affiche 4 produits par ligne en mode bureau */
+    margin: 1%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-description {
+    margin-top: 10px;
+}
+
+/* Styles pour smartphone */
+@media screen and (max-width: 768px) {
+
+    .product {
+        width: 100%; 
+        height: 50%;/* Affiche un produit par ligne en mode smartphone */
+        display: flex;
+        flex-direction: row; /* Affiche les informations horizontalement */
+    }
+
+    .product img {
+        width: 50%;
+        height: 20%; /* Taille réduite de l'image à gauche */
+        margin-right: 10px;
+    }
+
+    .product-description {
+        flex: 1;
+    }
+}

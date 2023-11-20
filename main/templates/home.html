@@ -4,19 +4,20 @@
 {% block content %}
 {% load static %}
 <link href='{% static "new/css/home.css" %}' rel='stylesheet'>
-<h1>Home</h1>
-<div class="book-panel">
+<h1>Acceuil</h1>
+<div class="product-panel">
     {% for article in articles %}
-    <div class="book-item">
-        <img src="{{article.image.url}}" alt="{{article.nom}}" width='224' height='280' >
-        <h2>{{article.nom}}</h2>
-        <p>Prix: {{article.prix}}</p>
-        <a href="{% url "art_detail" article.id %}" class='btn btn-info' >Détails</a>
+    <div class="product">
+        <img src="{{article.image.url}}" alt="{{ aticle.nom }}">
+        <div class='product-description'>
+            <p>{{ article.nom }}</p>
+            <p>{{ article.prix }}</p>
+            <a href="{% url "art_detail" article.id%}" class="btn btn-info details-button">Détails</a>
+        </div>
     </div>
     {% endfor %}
 </div>
 
 {% load static %}
- <link rel='stylesheet' href='{% static "new/css/style.css" %}'>
  <script src='{% static "new/js/index.js" %}'></script>
 {% endblock content %}

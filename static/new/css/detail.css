@@ -1,0 +1,31 @@
+.product {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .product-image {
+    flex: 1 1 40%;
+    margin-right: 20px;
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-info {
+    flex: 1 1 50%;
+  }
+  
+  @media (max-width: 768px) {
+    .product {
+      flex-direction: column;
+    }
+  
+    .product-image {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
